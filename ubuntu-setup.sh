@@ -192,3 +192,27 @@ echo 'installing docker-compose'
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
+
+echo 'cloud'
+
+echo "AWS developer? (y/n)"
+read developer_aws
+if echo "$developer_aws" | grep -iq "^y" ;then
+    echo 'installing aws-cli' 
+    sudo apt-get install awscli -y
+    aws --version
+    curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+    sudo dpkg -i session-manager-plugin.deb
+    session-manager-plugin --version
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
+
+echo "Azure developer? (y/n)"
+read developer_azure
+if echo "$developer_azure" | grep -iq "^y" ;then
+    echo 'installing azure-cli'
+    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
