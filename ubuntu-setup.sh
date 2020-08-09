@@ -153,9 +153,12 @@ if echo "$developer_dotnet" | grep -iq "^y" ;then
     wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
     sudo dpkg -i packages-microsoft-prod.deb
 
-    echo 'install sdk'
+    echo 'installing sdk'
     sudo apt-get install -y apt-transport-https
     sudo apt-get install -y dotnet-sdk-3.1
+
+    echo 'installing nuget'
+    sh -c "$(wget https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh -O -)"
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
