@@ -196,6 +196,10 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
+echo "What is your root user for remove 'sudo' docker?"
+read docker_user
+sudo usermod -aG docker $docker_user
+
 echo 'cloud'
 
 echo "AWS developer? (y/n)"
