@@ -159,6 +159,10 @@ if echo "$developer_dotnet" | grep -iq "^y" ;then
 
     echo 'installing nuget'
     sh -c "$(wget https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh -O -)"
+
+    # error: https://github.com/dotnet/aspnetcore/issues/8449
+    echo 'installing resolve System.IO.IOException'
+    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
