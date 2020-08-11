@@ -76,6 +76,7 @@ cat ~/.ssh/id_rsa.pub | xclip -selection clipboard
 echo 'Generating a GPG Key'
 sudo apt install gnupg
 gpg --default-new-key-algo rsa4096 --gen-key
+# export public key: gpg --armor --export {your_email}
 
 echo 'enabling workspaces for both screens' 
 gsettings set org.gnome.mutter workspaces-only-on-primary false
