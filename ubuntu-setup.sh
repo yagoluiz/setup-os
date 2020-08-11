@@ -73,6 +73,10 @@ ssh-keygen -t rsa -b 4096 -C $git_config_user_email
 ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub | xclip -selection clipboard
 
+echo 'Generating a GPG Key'
+sudo apt install gnupg
+gpg --default-new-key-algo rsa4096 --gen-key
+
 echo 'enabling workspaces for both screens' 
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 
