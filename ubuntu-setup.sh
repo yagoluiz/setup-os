@@ -186,10 +186,6 @@ sed -i 's/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g' ~/.zshrc
 echo 'installing insomnia'
 sudo snap install insomnia
 
-echo 'installing terminator'
-sudo apt-get update
-sudo apt-get install terminator -y
-
 echo 'installing docker' 
 sudo apt-get remove docker docker-engine docker.io
 sudo apt install docker.io -y
