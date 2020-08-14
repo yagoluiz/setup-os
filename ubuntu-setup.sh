@@ -105,27 +105,34 @@ sudo apt-get install apt-transport-https -y
 sudo apt-get update
 sudo apt-get install code -y # or code-insiders
 
-echo 'installing extensions'
-code --install-extension ms-vscode.azure-account
-code --install-extension ms-azuretools.vscode-azurefunctions
-code --install-extension ms-dotnettools.csharp
-code --install-extension k--kato.docomment
-code --install-extension cake-build.cake-vscode
-code --install-extension ryanluker.vscode-coverage-gutters
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension donjayamanne.githistory
-code --install-extension github.github-vscode-theme
-code --install-extension eamodio.gitlens
-code --install-extension hashicorp.terraform
-code --install-extension ms-vscode.js-debug-nightly
-code --install-extension pkief.material-icon-theme
-code --install-extension quicktype.quicktype
-code --install-extension ms-python.python
-code --install-extension humao.rest-client
-code --install-extension yagoluiz.sonar-dotnet-vscode # my extension <3
-code --install-extension gruntfuggly.todo-tree
-code --install-extension zxh404.vscode-proto3
+echo 'Install extensions code? (y/n)'
+echo 'Install if "Sync is On" not active'
+read code_sync
+if echo "$code_sync" | grep -iq "^y" ;then
+    echo 'installing extensions'
+    code --install-extension ms-vscode.azure-account
+    code --install-extension ms-azuretools.vscode-azurefunctions
+    code --install-extension ms-dotnettools.csharp
+    code --install-extension k--kato.docomment
+    code --install-extension cake-build.cake-vscode
+    code --install-extension ryanluker.vscode-coverage-gutters
+    code --install-extension ms-azuretools.vscode-docker
+    code --install-extension dbaeumer.vscode-eslint
+    code --install-extension donjayamanne.githistory
+    code --install-extension github.github-vscode-theme
+    code --install-extension eamodio.gitlens
+    code --install-extension hashicorp.terraform
+    code --install-extension ms-vscode.js-debug-nightly
+    code --install-extension pkief.material-icon-theme
+    code --install-extension quicktype.quicktype
+    code --install-extension ms-python.python
+    code --install-extension humao.rest-client
+    code --install-extension yagoluiz.sonar-dotnet-vscode # my extension <3
+    code --install-extension gruntfuggly.todo-tree
+    code --install-extension zxh404.vscode-proto3
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
 
 echo "NodeJS developer? (y/n)"
 read developer_node
