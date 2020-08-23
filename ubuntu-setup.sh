@@ -37,7 +37,7 @@ echo "Use Franz for comunication? (y/n)"
 read comunication_franz
 if echo "$comunication_franz" | grep -iq "^y" ;then
 	wget https://github.com/meetfranz/franz/releases/download/v5.1.0/franz_5.1.0_amd64.deb -O franz.deb
-    sudo dpkg -i franz.debchristian-kohler.path-intellisense
+    sudo dpkg -i franz.deb
     sudo apt-get install -y -f 
 else
 	echo "Okay, no problem. :) Let's move on!"
