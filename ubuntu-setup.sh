@@ -190,6 +190,10 @@ sudo apt install fonts-firacode -y
 wget -O ~/.oh-my-zsh/themes/wezm.zsh-theme https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/wezm.zsh-theme 
 sed -i 's/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g' ~/.zshrc
 
+echo 'installing terminator'
+sudo apt-get update
+sudo apt-get install terminator -y
+
 echo 'installing insomnia'
 sudo snap install insomnia
 
