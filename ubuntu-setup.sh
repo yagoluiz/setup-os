@@ -228,6 +228,11 @@ chmod +x minikube
 sudo mkdir -p /usr/local/bin/
 sudo install minikube /usr/local/bin/
 
+echo 'installing Dbeaver'
+wget -c https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O dbeaver.deb
+sudo dpkg -i dbeaver.deb
+sudo apt-get install -f
+
 echo 'cloud'
 
 echo "AWS developer? (y/n)"
