@@ -1,20 +1,20 @@
-echo 'init'
+echo "init"
 
 sudo apt-get update
 
-echo 'installing curl' 
+echo "installing curl" 
 sudo apt install curl -y
 
-echo 'utilities'
+echo "utilities"
 
-echo 'installing spotify' 
+echo "installing spotify" 
 snap install spotify
 
-echo 'installing chrome' 
+echo "installing chrome" 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
-echo 'comunication'
+echo "comunication"
 
 echo "Use Slack for comunication? (y/n)"
 read comunication_slack
@@ -43,9 +43,9 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
-echo 'dev'
+echo "dev"
 
-echo 'installing git' 
+echo "installing git" 
 sudo apt install git -y
 
 echo "What name do you want to use in GIT user.name?"
@@ -73,31 +73,31 @@ ssh-keygen -t rsa -b 4096 -C $git_config_user_email
 ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub | xclip -selection clipboard
 
-echo 'Generating a GPG Key'
+echo "Generating a GPG Key"
 sudo apt install gnupg
 gpg --default-new-key-algo rsa4096 --gen-key
 # export public key: gpg --armor --export {your_email}
 
-echo 'enabling workspaces for both screens' 
+echo "enabling workspaces for both screens" 
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 
-echo 'installing vim'
+echo "installing vim"
 sudo apt install vim -y
 clear
 
-echo 'installing code'
+echo "installing code"
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+sudo sh -c "echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list"
 sudo apt-get install apt-transport-https -y
 sudo apt-get update
 sudo apt-get install code -y # or code-insiders
 
-echo 'Install extensions code? (y/n)'
-echo 'Install if "Sync is On" not active'
+echo "Install extensions code? (y/n)"
+echo "Install if "Sync is On" not active"
 read code_sync
 if echo "$code_sync" | grep -iq "^y" ;then
-    echo 'installing extensions'
+    echo "installing extensions"
     code --install-extension ms-vscode.azure-account
     code --install-extension ms-azuretools.vscode-azurefunctions
     code --install-extension ms-dotnettools.csharp
@@ -125,7 +125,7 @@ fi
 echo "NodeJS developer? (y/n)"
 read developer_node
 if echo "$developer_node" | grep -iq "^y" ;then
-    echo 'installing nvm' 
+    echo "installing nvm" 
     sh -c "$(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash)"
 
     export NVM_DIR="$HOME/.nvm" && (
@@ -146,28 +146,28 @@ if echo "$developer_dotnet" | grep -iq "^y" ;then
     wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
     sudo dpkg -i packages-microsoft-prod.deb
 
-    echo 'installing sdk'
+    echo "installing sdk"
     sudo apt-get install -y apt-transport-https
     sudo apt-get install -y dotnet-sdk-3.1
 
-    echo 'installing nuget'
+    echo "installing nuget"
     sh -c "$(wget https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh -O -)"
 
     # error: https://github.com/dotnet/aspnetcore/issues/8449
-    echo 'installing resolve System.IO.IOException'
+    echo "installing resolve System.IO.IOException"
     echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
-echo 'installing terminator'
+echo "installing terminator"
 sudo apt-get update
 sudo apt-get install terminator -y
 
-echo 'installing insomnia'
+echo "installing insomnia"
 sudo snap install insomnia
 
-echo 'installing docker' 
+echo "installing docker" 
 sudo apt-get remove docker docker-engine docker.io
 sudo apt install docker.io -y
 sudo systemctl start docker
@@ -177,38 +177,38 @@ docker --version
 chmod 777 /var/run/docker.sock
 docker run hello-world
 
-echo 'installing docker-compose' 
+echo "installing docker-compose" 
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
-echo "What is your root user for remove 'sudo' docker?"
+echo "What is your root user for remove "sudo" docker?"
 read docker_user
 sudo usermod -aG docker $docker_user
 
-echo 'installing kubernetes'
+echo "installing kubernetes"
 sudo curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 kubectl version --client
 
-echo 'installing minikube'
+echo "installing minikube"
 sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 chmod +x minikube
 sudo mkdir -p /usr/local/bin/
 sudo install minikube /usr/local/bin/
 
-echo 'installing Dbeaver'
+echo "installing Dbeaver"
 wget -c https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O dbeaver.deb
 sudo dpkg -i dbeaver.deb
 sudo apt-get install -f
 
-echo 'cloud'
+echo "cloud"
 
 echo "AWS developer? (y/n)"
 read developer_aws
 if echo "$developer_aws" | grep -iq "^y" ;then
-    echo 'installing aws-cli' 
+    echo "installing aws-cli" 
     sudo apt-get install awscli -y
     aws --version
     curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
@@ -221,39 +221,39 @@ fi
 echo "Azure developer? (y/n)"
 read developer_azure
 if echo "$developer_azure" | grep -iq "^y" ;then
-    echo 'installing azure-cli'
+    echo "installing azure-cli"
     curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
-echo 'zsh'
+echo "zsh"
 
-echo 'installing zsh'
+echo "installing zsh"
 sudo apt-get install zsh -y
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 chsh -s /bin/zsh
 
-echo 'installing tool to handle clipboard via CLI'
+echo "installing tool to handle clipboard via CLI"
 sudo apt-get install xclip -y
 
-export alias pbcopy='xclip -selection clipboard'
-export alias pbpaste='xclip -selection clipboard -o'
+export alias pbcopy="xclip -selection clipboard"
+export alias pbpaste="xclip -selection clipboard -o"
 source ~/.zshrc
 
-echo 'installing autosuggestions' 
+echo "installing autosuggestions" 
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
 source ~/.zshrc
 
 # themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#theme-description-format
-echo 'installing theme (wezm)'
+echo "installing theme (wezm)"
 sudo apt install fonts-firacode -y
 wget -O ~/.oh-my-zsh/themes/wezm.zsh-theme https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/wezm.zsh-theme 
-sed -i 's/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g' ~/.zshrc
+sed -i "s/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g" ~/.zshrc
 
 if echo "$developer_node" | grep -iq "^y" ;then
-    echo 'node version install'
+    echo "node version install"
     source ~/.zshrc
     nvm --version
     nvm install 12
