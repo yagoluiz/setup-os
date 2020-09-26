@@ -19,7 +19,7 @@ echo 'comunication'
 echo "Use Slack for comunication? (y/n)"
 read comunication_slack
 if echo "$comunication_slack" | grep -iq "^y" ;then
-	wget https://downloads.slack-edge.com/linux_releases/slack-desktop-3.3.8-amd64.deb
+	wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.9.1-amd64.deb
   sudo apt install ./slack-desktop-*.deb -y
 else
 	echo "Okay, no problem. :) Let's move on!"
@@ -81,18 +81,6 @@ gpg --default-new-key-algo rsa4096 --gen-key
 echo 'enabling workspaces for both screens' 
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 
-echo 'installing zsh'
-sudo apt-get install zsh -y
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-chsh -s /bin/zsh
-
-echo 'installing tool to handle clipboard via CLI'
-sudo apt-get install xclip -y
-
-export alias pbcopy='xclip -selection clipboard'
-export alias pbpaste='xclip -selection clipboard -o'
-source ~/.zshrc
-
 echo 'installing vim'
 sudo apt install vim -y
 clear
@@ -148,13 +136,6 @@ if echo "$developer_node" | grep -iq "^y" ;then
 
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-    source ~/.zshrc
-    nvm --version
-    nvm install 12
-    nvm alias default 12
-    node --version
-    npm --version
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -178,17 +159,6 @@ if echo "$developer_dotnet" | grep -iq "^y" ;then
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
-
-echo 'installing autosuggestions' 
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-source ~/.zshrc
-
-# themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#theme-description-format
-echo 'installing theme (wezm)'
-sudo apt install fonts-firacode -y
-wget -O ~/.oh-my-zsh/themes/wezm.zsh-theme https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/wezm.zsh-theme 
-sed -i 's/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g' ~/.zshrc
 
 echo 'installing terminator'
 sudo apt-get update
@@ -256,3 +226,37 @@ if echo "$developer_azure" | grep -iq "^y" ;then
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
+
+echo 'zsh'
+
+echo 'installing zsh'
+sudo apt-get install zsh -y
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+chsh -s /bin/zsh
+
+echo 'installing tool to handle clipboard via CLI'
+sudo apt-get install xclip -y
+
+export alias pbcopy='xclip -selection clipboard'
+export alias pbpaste='xclip -selection clipboard -o'
+source ~/.zshrc
+
+echo 'installing autosuggestions' 
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+source ~/.zshrc
+
+# themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#theme-description-format
+echo 'installing theme (wezm)'
+sudo apt install fonts-firacode -y
+wget -O ~/.oh-my-zsh/themes/wezm.zsh-theme https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/wezm.zsh-theme 
+sed -i 's/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g' ~/.zshrc
+
+if echo "$developer_node" | grep -iq "^y" ;then
+    echo 'node version install'
+    source ~/.zshrc
+    nvm --version
+    nvm install 12
+    nvm alias default 12
+    node --version
+    npm --version
