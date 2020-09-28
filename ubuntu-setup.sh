@@ -164,8 +164,8 @@ echo "installing terminator"
 sudo apt-get update
 sudo apt-get install terminator -y
 
-echo "installing insomnia"
-sudo snap install insomnia
+echo "installing postman"
+sudo snap install postman
 
 echo "installing docker" 
 sudo apt-get remove docker docker-engine docker.io
