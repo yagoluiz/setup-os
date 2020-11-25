@@ -81,6 +81,10 @@ gpg --default-new-key-algo rsa4096 --gen-key
 echo "enabling workspaces for both screens" 
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 
+echo "installing clustergit"
+sudo curl -SsLo /usr/local/bin/clustergit https://raw.githubusercontent.com/mnagel/clustergit/master/clustergit
+sudo chmod +x /usr/local/bin/clustergit
+
 echo "installing vim"
 sudo apt install vim -y
 clear
