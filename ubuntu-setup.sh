@@ -148,7 +148,7 @@ if echo "$developer_dotnet" | grep -iq "^y" ;then
 
     echo "installing sdk"
     sudo apt-get install -y apt-transport-https
-    sudo apt-get install -y dotnet-sdk-3.1
+    sudo apt-get install -y dotnet-sdk-5.0
 
     echo "installing nuget"
     sh -c "$(wget https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh -O -)"
@@ -178,7 +178,7 @@ chmod 777 /var/run/docker.sock
 docker run hello-world
 
 echo "installing docker-compose" 
-sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
@@ -256,7 +256,7 @@ if echo "$developer_node" | grep -iq "^y" ;then
     echo "node version install"
     source ~/.zshrc
     nvm --version
-    nvm install 12
-    nvm alias default 12
+    nvm install 14
+    nvm alias default 14
     node --version
     npm --version
