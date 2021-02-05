@@ -213,11 +213,10 @@ echo "AWS developer? (y/n)"
 read developer_aws
 if echo "$developer_aws" | grep -iq "^y" ;then
     echo "installing aws-cli" 
-    sudo apt-get install awscli -y
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
     aws --version
-    curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
-    sudo dpkg -i session-manager-plugin.deb
-    session-manager-plugin --version
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -227,6 +226,7 @@ read developer_azure
 if echo "$developer_azure" | grep -iq "^y" ;then
     echo "installing azure-cli"
     curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    az --version
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
