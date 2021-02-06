@@ -217,6 +217,11 @@ if echo "$developer_aws" | grep -iq "^y" ;then
     unzip awscliv2.zip
     sudo ./aws/install
     aws --version
+
+    echo "installing AWS SAM (Serverless Application Model)"
+    sudo apt-get install python3-pip
+    pip3 install --user aws-sam-cli
+    sam --version
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
