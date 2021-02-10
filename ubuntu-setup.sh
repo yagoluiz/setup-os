@@ -140,6 +140,12 @@ if echo "$developer_node" | grep -iq "^y" ;then
 
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+    echo "installing yarn"
+    sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    sudo sh -c "echo 'deb https://dl.yarnpkg.com/debian/ stable main' >> /etc/apt/sources.list"
+
+    sudo apt-get install yarn -y
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
