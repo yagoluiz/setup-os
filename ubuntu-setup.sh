@@ -213,6 +213,9 @@ wget -c https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O dbeaver.deb
 sudo dpkg -i dbeaver.deb
 sudo apt-get install -f
 
+echo "installing uuid"
+sudo apt-get uuid
+
 echo "cloud"
 
 echo "AWS developer? (y/n)"
@@ -275,3 +278,12 @@ if echo "$developer_node" | grep -iq "^y" ;then
     nvm alias default 14
     node --version
     npm --version
+
+echo "Serverless developer? (y/n)"
+read developer_serverless
+if echo "$developer_serverless" | grep -iq "^y" ;then
+    echo "installing serverless framework"
+    npm install -g serverless
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi    
