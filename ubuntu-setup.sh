@@ -245,6 +245,15 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
+echo "Serverless developer? (y/n)"
+read developer_serverless
+if echo "$developer_serverless" | grep -iq "^y" ;then
+    echo "installing serverless framework"
+    curl -o- -L https://slss.io/install | bash
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
+
 echo "zsh"
 
 echo "installing zsh"
@@ -278,12 +287,3 @@ if echo "$developer_node" | grep -iq "^y" ;then
     nvm alias default 14
     node --version
     npm --version
-
-echo "Serverless developer? (y/n)"
-read developer_serverless
-if echo "$developer_serverless" | grep -iq "^y" ;then
-    echo "installing serverless framework"
-    npm install -g serverless
-else
-	echo "Okay, no problem. :) Let's move on!"
-fi    
