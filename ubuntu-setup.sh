@@ -137,6 +137,11 @@ if echo "$developer_dotnet" | grep -iq "^y" ;then
     # error: https://github.com/dotnet/aspnetcore/issues/8449
     echo "installing resolve System.IO.IOException"
     echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+    echo "installing global packages"
+    dotnet tool install --global dotnet-ef
+    dotnet tool install --global dotnet-reportgenerator-globaltool  
+    dotnet tool install --global dotnet-sonarscanner
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
