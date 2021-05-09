@@ -7,9 +7,6 @@ sudo apt install curl -y
 
 echo "utilities"
 
-echo "installing spotify" 
-snap install spotify
-
 echo "installing chrome" 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
@@ -20,7 +17,7 @@ echo "Use Slack for comunication? (y/n)"
 read comunication_slack
 if echo "$comunication_slack" | grep -iq "^y" ;then
 	wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.9.1-amd64.deb
-  sudo apt install ./slack-desktop-*.deb -y
+    sudo apt install ./slack-desktop-*.deb -y
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -28,7 +25,8 @@ fi
 echo "Use Teams for comunication? (y/n)"
 read comunication_teams
 if echo "$comunication_teams" | grep -iq "^y" ;then
-	sudo snap install teams-for-linux
+	wget https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.4.00.7556_amd64.deb
+    sudo apt install ./teams*.deb -y
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
