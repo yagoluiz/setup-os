@@ -230,6 +230,10 @@ if echo "$developer_azure" | grep -iq "^y" ;then
     sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list'
     
     sudo apt-get install azure-functions-core-tools-3
+
+    echo "installing storage explorer"
+    sudo snap install storage-explorer
+    snap connect storage-explorer:password-manager-service :password-manager-service
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
