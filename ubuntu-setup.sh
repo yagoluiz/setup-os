@@ -197,6 +197,11 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt-get update && sudo apt-get install terraform
 terraform -help
 
+echo "installing filezilla"
+sudo add-apt-repository ppa:n-muench/programs-ppa
+sudo apt-get update
+sudo apt-get install filezilla
+
 echo "cloud"
 
 echo "AWS developer? (y/n)"
