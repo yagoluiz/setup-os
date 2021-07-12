@@ -157,6 +157,20 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
+echo "JetBrains developer? (y/n)"
+read developer_jetbrains
+if echo "$developer_jetbrains" | grep -iq "^y" ;then
+    echo "installing jetbrains toolkit"
+    wget --show-progress -qO ./toolbox.tar.gz "https://data.services.jetbrains.com/products/download?platform=linux&code=TBA"
+    TOOLBOX_TEMP_DIR=$(mktemp -d)
+    sudo tar -C "$TOOLBOX_TEMP_DIR" -xf toolbox.tar.gz
+    rm ./toolbox.tar.gz
+    "$TOOLBOX_TEMP_DIR"/*/jetbrains-toolbox
+    rm -r "$TOOLBOX_TEMP_DIR"
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
+
 echo "installing terminator"
 sudo apt-get update
 sudo apt-get install terminator -y
