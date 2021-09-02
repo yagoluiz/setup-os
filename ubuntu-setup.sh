@@ -215,6 +215,14 @@ wget -c https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O dbeaver.deb
 sudo dpkg -i dbeaver.deb
 sudo apt-get install -f
 
+echo "installing Robo3t"
+wget -c https://download.studio3t.com/robomongo/linux/robo3t-1.4.3-linux-x86_64-48f7dfd.tar.gz -O robomongo.tar.gz
+tar -xvzf robomongo.tar.gz
+sudo mkdir /usr/local/bin/robo3t
+sudo mv robomongo/* /usr/local/bin/robo3t
+sudo chmod +x robo3t ./robo3t
+# icon and desktop: https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae
+
 echo "installing uuid"
 sudo apt-get uuid
 
