@@ -1,9 +1,12 @@
 echo "init"
 
-sudo apt-get update
+sudo apt-get update && sudo apt-get upgrade
 
 echo "installing curl" 
 sudo apt install curl -y
+
+echo "installing clipboard"
+sudo apt-get install xclip -y
 
 echo "utilities"
 
@@ -16,7 +19,7 @@ echo "comunication"
 echo "Use Slack for comunication? (y/n)"
 read comunication_slack
 if echo "$comunication_slack" | grep -iq "^y" ;then
-	wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.9.1-amd64.deb
+	wget https://downloads.slack-edge.com/releases/linux/4.19.2/prod/x64/slack-desktop-4.19.2-amd64.deb
     sudo apt install ./slack-desktop-*.deb -y
 else
 	echo "Okay, no problem. :) Let's move on!"
@@ -87,13 +90,9 @@ echo "installing vim"
 sudo apt install vim -y
 clear
 
-echo "installing code"
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c "echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list"
-sudo apt-get install apt-transport-https -y
-sudo apt-get update
-sudo apt-get install code -y # or code-insiders
+echo "installing VS Code"
+wget https://az764295.vo.msecnd.net/stable/7f6ab5485bbc008386c4386d08766667e155244e/code_1.60.2-1632313585_amd64.deb -O vscode.deb
+sudo dpkg -i vscode.deb
 
 echo "NodeJS developer? (y/n)"
 read developer_node
@@ -215,16 +214,22 @@ wget -c https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O dbeaver.deb
 sudo dpkg -i dbeaver.deb
 sudo apt-get install -f
 
-echo "installing Robo3t"
-wget -c https://download.studio3t.com/robomongo/linux/robo3t-1.4.3-linux-x86_64-48f7dfd.tar.gz -O robomongo.tar.gz
-tar -xvzf robomongo.tar.gz
-sudo mkdir /usr/local/bin/robo3t
-sudo mv robomongo/* /usr/local/bin/robo3t
-sudo chmod +x robo3t ./robo3t
-# icon and desktop: https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae
+echo "Use Robo3t? (y/n)"
+read developer_robo3t
+if echo "$developer_robo3t" | grep -iq "^y" ;then
+    echo "installing Robo3t"
+    wget -c https://download.studio3t.com/robomongo/linux/robo3t-1.4.3-linux-x86_64-48f7dfd.tar.gz -O robomongo.tar.gz
+    tar -xvzf robomongo.tar.gz
+    sudo mkdir /usr/local/bin/robo3t
+    sudo mv robomongo/* /usr/local/bin/robo3t
+    sudo chmod +x robo3t ./robo3t
+    # icon and desktop: https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
 
 echo "installing uuid"
-sudo apt-get uuid
+sudo apt-get install uuid
 
 echo "installing terraform"
 sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
@@ -232,10 +237,16 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt-get update && sudo apt-get install terraform
 terraform -help
 
-echo "installing filezilla"
-sudo add-apt-repository ppa:n-muench/programs-ppa
-sudo apt-get update
-sudo apt-get install filezilla
+echo "Use Filezilla? (y/n)"
+read developer_filezilla
+if echo "$developer_filezilla" | grep -iq "^y" ;then
+    echo "installing filezilla"
+    sudo add-apt-repository ppa:n-muench/programs-ppa
+    sudo apt-get update
+    sudo apt-get install filezilla
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
 
 echo "cloud"
 
@@ -289,34 +300,37 @@ fi
 
 echo "zsh"
 
-echo "installing zsh"
-sudo apt-get install zsh -y
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-chsh -s /bin/zsh
+echo "Use ZSH? (y/n)"
+read zsh_developer
+if echo "$zsh_developer" | grep -iq "^y" ;then
+    echo "installing zsh"
+    sudo apt-get install zsh -y
+    sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    chsh -s /bin/zsh
 
-echo "installing tool to handle clipboard via CLI"
-sudo apt-get install xclip -y
-
-export alias pbcopy="xclip -selection clipboard"
-export alias pbpaste="xclip -selection clipboard -o"
-source ~/.zshrc
-
-echo "installing autosuggestions" 
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-source ~/.zshrc
-
-# themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#theme-description-format
-echo "installing theme (wezm)"
-sudo apt install fonts-firacode -y
-wget -O ~/.oh-my-zsh/themes/wezm.zsh-theme https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/wezm.zsh-theme 
-sed -i "s/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g" ~/.zshrc
-
-if echo "$developer_node" | grep -iq "^y" ;then
-    echo "node version install"
+    export alias pbcopy="xclip -selection clipboard"
+    export alias pbpaste="xclip -selection clipboard -o"
     source ~/.zshrc
-    nvm --version
-    nvm install 14
-    nvm alias default 14
-    node --version
-    npm --version
+
+    echo "installing autosuggestions" 
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+    echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+    source ~/.zshrc
+
+    # themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#theme-description-format
+    echo "installing theme (wezm)"
+    sudo apt install fonts-firacode -y
+    wget -O ~/.oh-my-zsh/themes/wezm.zsh-theme https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/wezm.zsh-theme 
+    sed -i "s/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g" ~/.zshrc
+
+    if echo "$developer_node" | grep -iq "^y" ;then
+        echo "node version install"
+        source ~/.zshrc
+        nvm --version
+        nvm install 14
+        nvm alias default 14
+        node --version
+        npm --version
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
