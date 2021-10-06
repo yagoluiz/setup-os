@@ -156,6 +156,19 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
+echo "Go developer? (y/n)"
+read developer_go
+if echo "$developer_go" | grep -iq "^y" ;then
+    echo "installing go"
+    wget -c https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz -O go.tar.gz
+    sudo rm -rf /usr/local/go
+    sudo tar -C /usr/local -xzf go.tar.gz
+    export PATH=$PATH:/usr/local/go/bin
+    go version
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
+
 echo "JetBrains developer? (y/n)"
 read developer_jetbrains
 if echo "$developer_jetbrains" | grep -iq "^y" ;then
