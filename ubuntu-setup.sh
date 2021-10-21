@@ -175,7 +175,7 @@ if echo "$developer_jetbrains" | grep -iq "^y" ;then
     echo "installing jetbrains toolkit"
     wget --show-progress -qO ./toolbox.tar.gz "https://data.services.jetbrains.com/products/download?platform=linux&code=TBA"
     TOOLBOX_TEMP_DIR=$(mktemp -d)
-    sudo tar -C "$TOOLBOX_TEMP_DIR" -xf toolbox.tar.gz
+    tar -C "$TOOLBOX_TEMP_DIR" -xf toolbox.tar.gz
     rm ./toolbox.tar.gz
     "$TOOLBOX_TEMP_DIR"/*/jetbrains-toolbox
     rm -r "$TOOLBOX_TEMP_DIR"
