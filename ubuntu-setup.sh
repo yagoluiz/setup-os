@@ -98,7 +98,7 @@ echo "NodeJS developer? (y/n)"
 read developer_node
 if echo "$developer_node" | grep -iq "^y" ;then
     echo "installing nvm" 
-    sh -c "$(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash)"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
     export NVM_DIR="$HOME/.nvm" && (
     git clone https://github.com/creationix/nvm.git "$NVM_DIR"
