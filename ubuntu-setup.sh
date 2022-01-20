@@ -126,7 +126,7 @@ if echo "$developer_dotnet" | grep -iq "^y" ;then
 
     echo "installing sdk"
     sudo apt-get install -y apt-transport-https
-    sudo apt-get install -y dotnet-sdk-5.0
+    sudo apt-get install -y dotnet-sdk-6.0
 
     echo "installing nuget"
     sh -c "$(wget https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh -O -)"
