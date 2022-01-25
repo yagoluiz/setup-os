@@ -36,16 +36,6 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
-echo "Use Franz for comunication? (y/n)"
-read comunication_franz
-if echo "$comunication_franz" | grep -iq "^y" ;then
-	wget https://github.com/meetfranz/franz/releases/download/v5.1.0/franz_5.1.0_amd64.deb -O franz.deb
-    dpkg -i franz.deb
-    apt install -y -f 
-else
-	echo "Okay, no problem. :) Let's move on!"
-fi
-
 echo "dev"
 
 echo "installing git" 
