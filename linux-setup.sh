@@ -27,15 +27,6 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
-echo "Use Teams for comunication? (y/n)"
-read comunication_teams
-if echo "$comunication_teams" | grep -iq "^y" ;then
-	wget https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.4.00.7556_amd64.deb
-    apt install ./teams*.deb -y
-else
-	echo "Okay, no problem. :) Let's move on!"
-fi
-
 echo "dev"
 
 echo "installing git" 
