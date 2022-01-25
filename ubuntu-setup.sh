@@ -3,16 +3,16 @@ echo "init"
 sudo apt-get update && sudo apt-get upgrade
 
 echo "installing curl" 
-sudo apt install curl -y
+apt install curl -y
 
 echo "installing clipboard"
-sudo apt-get install xclip -y
+apt-get install xclip -y
 
 echo "utilities"
 
 echo "installing chrome" 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
+dpkg -i google-chrome-stable_current_amd64.deb
 
 echo "comunication"
 
@@ -20,7 +20,7 @@ echo "Use Slack for comunication? (y/n)"
 read comunication_slack
 if echo "$comunication_slack" | grep -iq "^y" ;then
 	wget https://downloads.slack-edge.com/releases/linux/4.19.2/prod/x64/slack-desktop-4.19.2-amd64.deb
-    sudo apt install ./slack-desktop-*.deb -y
+    apt install ./slack-desktop-*.deb -y
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -29,7 +29,7 @@ echo "Use Teams for comunication? (y/n)"
 read comunication_teams
 if echo "$comunication_teams" | grep -iq "^y" ;then
 	wget https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.4.00.7556_amd64.deb
-    sudo apt install ./teams*.deb -y
+    apt install ./teams*.deb -y
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -38,8 +38,8 @@ echo "Use Franz for comunication? (y/n)"
 read comunication_franz
 if echo "$comunication_franz" | grep -iq "^y" ;then
 	wget https://github.com/meetfranz/franz/releases/download/v5.1.0/franz_5.1.0_amd64.deb -O franz.deb
-    sudo dpkg -i franz.deb
-    sudo apt-get install -y -f 
+    dpkg -i franz.deb
+    apt-get install -y -f 
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -47,7 +47,7 @@ fi
 echo "dev"
 
 echo "installing git" 
-sudo apt install git -y
+apt install git -y
 
 echo "What name do you want to use in GIT user.name?"
 echo "For example, mine will be \"Yago Luiz\""
@@ -75,7 +75,7 @@ ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub | xclip -selection clipboard
 
 echo "Generating a GPG Key"
-sudo apt install gnupg
+apt install gnupg
 gpg --default-new-key-algo rsa4096 --gen-key
 # export public key: gpg --armor --export {your_email}
 
@@ -83,16 +83,16 @@ echo "enabling workspaces for both screens"
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 
 echo "installing clustergit"
-sudo curl -SsLo /usr/local/bin/clustergit https://raw.githubusercontent.com/mnagel/clustergit/master/clustergit
-sudo chmod +x /usr/local/bin/clustergit
+curl -SsLo /usr/local/bin/clustergit https://raw.githubusercontent.com/mnagel/clustergit/master/clustergit
+chmod +x /usr/local/bin/clustergit
 
 echo "installing vim"
-sudo apt install vim -y
+apt install vim -y
 clear
 
 echo "installing VS Code"
 wget https://az764295.vo.msecnd.net/stable/7f6ab5485bbc008386c4386d08766667e155244e/code_1.60.2-1632313585_amd64.deb -O vscode.deb
-sudo dpkg -i vscode.deb
+dpkg -i vscode.deb
 
 echo "NodeJS developer? (y/n)"
 read developer_node
@@ -110,10 +110,10 @@ if echo "$developer_node" | grep -iq "^y" ;then
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
     echo "installing yarn"
-    sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    sudo sh -c "echo 'deb https://dl.yarnpkg.com/debian/ stable main' >> /etc/apt/sources.list"
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    sh -c "echo 'deb https://dl.yarnpkg.com/debian/ stable main' >> /etc/apt/sources.list"
 
-    sudo apt-get install yarn -y
+    apt-get install yarn -y
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -122,18 +122,18 @@ echo "Dotnet developer? (y/n)"
 read developer_dotnet
 if echo "$developer_dotnet" | grep -iq "^y" ;then
     wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    sudo dpkg -i packages-microsoft-prod.deb
+    dpkg -i packages-microsoft-prod.deb
 
     echo "installing sdk"
-    sudo apt-get install -y apt-transport-https
-    sudo apt-get install -y dotnet-sdk-6.0
+    apt-get install -y apt-transport-https
+    apt-get install -y dotnet-sdk-6.0
 
     echo "installing nuget"
     sh -c "$(wget https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh -O -)"
 
     # error: https://github.com/dotnet/aspnetcore/issues/8449
     echo "installing resolve System.IO.IOException"
-    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+    echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
 
     echo "installing global packages"
     dotnet tool install --global dotnet-ef
@@ -147,11 +147,11 @@ echo "Mono developer? (y/n)"
 read developer_mono
 if echo "$developer_mono" | grep -iq "^y" ;then
     echo "installing mono"
-    sudo apt install gnupg ca-certificates
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-    echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-    sudo apt update
-    sudo apt install mono-devel
+    apt install gnupg ca-certificates
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+    echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list
+    apt update
+    apt install mono-devel
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -161,8 +161,8 @@ read developer_go
 if echo "$developer_go" | grep -iq "^y" ;then
     echo "installing go"
     wget -c https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz -O go.tar.gz
-    sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf go.tar.gz
+    rm -rf /usr/local/go
+    tar -C /usr/local -xzf go.tar.gz
     export PATH=$PATH:/usr/local/go/bin
     go version
 else
@@ -184,53 +184,53 @@ else
 fi
 
 echo "installing terminator"
-sudo apt-get update
-sudo apt-get install terminator -y
+apt-get update
+apt-get install terminator -y
 
 echo "installing postman"
-sudo snap install postman
+snap install postman
 
 echo "installing docker" 
-sudo apt-get remove docker docker-engine docker.io containerd runc
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+apt-get remove docker docker-engine docker.io containerd runc
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-sudo systemctl enable docker
+apt-get update
+apt-get install docker-ce docker-ce-cli containerd.io
+systemctl enable docker
 
-sudo docker run hello-world
+docker run hello-world
 
 echo "installing docker-compose" 
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose --version
 
 echo "What is your root user for remove "sudo" docker?"
 read docker_user
-sudo usermod -aG docker $docker_user
+usermod -aG docker $docker_user
 
 echo "installing kubernetes"
-sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 mkdir -p ~/.local/bin/kubectl
 mv ./kubectl ~/.local/bin/kubectl
 kubectl version --client
 
 echo "installing minikube"
-sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 chmod +x minikube
-sudo mkdir -p /usr/local/bin/
-sudo install minikube /usr/local/bin/
+mkdir -p /usr/local/bin/
+install minikube /usr/local/bin/
 
 echo "installing Dbeaver"
 wget -c https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O dbeaver.deb
-sudo dpkg -i dbeaver.deb
-sudo apt-get install -f
+dpkg -i dbeaver.deb
+apt-get install -f
 
 echo "Use Robo3t? (y/n)"
 read developer_robo3t
@@ -238,30 +238,30 @@ if echo "$developer_robo3t" | grep -iq "^y" ;then
     echo "installing Robo3t"
     wget -c https://download.studio3t.com/robomongo/linux/robo3t-1.4.3-linux-x86_64-48f7dfd.tar.gz -O robomongo.tar.gz
     tar -xvzf robomongo.tar.gz
-    sudo mkdir /usr/local/bin/robo3t
-    sudo mv robomongo/* /usr/local/bin/robo3t
-    sudo chmod +x robo3t ./robo3t
+    mkdir /usr/local/bin/robo3t
+    mv robomongo/* /usr/local/bin/robo3t
+    chmod +x robo3t ./robo3t
     # icon and desktop: https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
 echo "installing uuid"
-sudo apt-get install uuid
+apt-get install uuid
 
 echo "installing terraform"
-sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo apt-get update && sudo apt-get install terraform
+curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+apt-get update && apt-get install terraform
 terraform -help
 
 echo "Use Filezilla? (y/n)"
 read developer_filezilla
 if echo "$developer_filezilla" | grep -iq "^y" ;then
     echo "installing filezilla"
-    sudo add-apt-repository ppa:n-muench/programs-ppa
-    sudo apt-get update
-    sudo apt-get install filezilla
+    add-apt-repository ppa:n-muench/programs-ppa
+    apt-get update
+    apt-get install filezilla
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -274,11 +274,11 @@ if echo "$developer_aws" | grep -iq "^y" ;then
     echo "installing aws-cli" 
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
-    sudo ./aws/install
+    ./aws/install
     aws --version
 
     echo "installing AWS SAM (Serverless Application Model)"
-    sudo apt-get install python3-pip
+    apt-get install python3-pip
     pip3 install --user aws-sam-cli
     sam --version
 else
@@ -289,19 +289,19 @@ echo "Azure developer? (y/n)"
 read developer_azure
 if echo "$developer_azure" | grep -iq "^y" ;then
     echo "installing azure-cli"
-    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    curl -sL https://aka.ms/InstallAzureCLIDeb | bash
     az --version
 
     echo "installing azure functions"
     curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-    sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+    mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
     
-    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list'
+    sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list'
     
-    sudo apt-get install azure-functions-core-tools-3
+    apt-get install azure-functions-core-tools-3
 
     echo "installing storage explorer"
-    sudo snap install storage-explorer
+    snap install storage-explorer
     snap connect storage-explorer:password-manager-service :password-manager-service
 else
 	echo "Okay, no problem. :) Let's move on!"
@@ -311,10 +311,10 @@ echo "Google developer? (y/n)"
 read developer_gcp
 if echo "$developer_gcp" | grep -iq "^y" ;then
     echo "installing gcp-cli"
-    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-    sudo apt-get install apt-transport-https ca-certificates gnupg
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-    sudo apt-get update && sudo apt-get install google-cloud-sdk
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    apt-get install apt-transport-https ca-certificates gnupg
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+    apt-get update && apt-get install google-cloud-sdk
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -334,7 +334,7 @@ echo "Use oh-my-zsh? (y/n)"
 read zsh_developer
 if echo "$zsh_developer" | grep -iq "^y" ;then
     echo "installing zsh"
-    sudo apt-get install zsh -y
+    apt-get install zsh -y
     sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
     chsh -s /bin/zsh
 
@@ -349,7 +349,7 @@ if echo "$zsh_developer" | grep -iq "^y" ;then
 
     # themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#theme-description-format
     echo "installing theme (wezm)"
-    sudo apt install fonts-firacode -y
+    apt install fonts-firacode -y
     wget -O ~/.oh-my-zsh/themes/wezm.zsh-theme https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/wezm.zsh-theme 
     sed -i "s/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g" ~/.zshrc
 
