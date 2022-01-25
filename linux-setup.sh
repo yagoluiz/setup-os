@@ -171,7 +171,21 @@ apt update
 apt install terminator -y
 
 echo "installing postman"
-snap install postman
+wget -c https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
+tar -xvzf postman.tar.gz
+mv Postman /opt/Postman/
+ln -s /opt/Postman/ /usr/local/bin/postman
+
+# desktop icon: sudo vim /usr/share/applications/postman.desktop
+
+# [Desktop Entry]
+# Encoding=UTF-8
+# Name=Postman
+# Exec=/opt/Postman/app/Postman %U
+# Icon=/opt/Postman/app/resources/app/assets/icon.png
+# Terminal=false
+# Type=Application
+# Categories=Development;
 
 echo "installing docker" 
 apt remove docker docker-engine docker.io containerd runc
