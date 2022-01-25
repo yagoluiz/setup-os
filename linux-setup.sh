@@ -1,12 +1,14 @@
+# /bin/bash
+
 echo "init"
 
-sudo apt-get update && sudo apt-get upgrade
+sudo apt update && sudo apt upgrade
 
 echo "installing curl" 
 apt install curl -y
 
 echo "installing clipboard"
-apt-get install xclip -y
+apt install xclip -y
 
 echo "utilities"
 
@@ -39,7 +41,7 @@ read comunication_franz
 if echo "$comunication_franz" | grep -iq "^y" ;then
 	wget https://github.com/meetfranz/franz/releases/download/v5.1.0/franz_5.1.0_amd64.deb -O franz.deb
     dpkg -i franz.deb
-    apt-get install -y -f 
+    apt install -y -f 
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -113,7 +115,7 @@ if echo "$developer_node" | grep -iq "^y" ;then
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
     sh -c "echo 'deb https://dl.yarnpkg.com/debian/ stable main' >> /etc/apt/sources.list"
 
-    apt-get install yarn -y
+    apt install yarn -y
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -125,8 +127,8 @@ if echo "$developer_dotnet" | grep -iq "^y" ;then
     dpkg -i packages-microsoft-prod.deb
 
     echo "installing sdk"
-    apt-get install -y apt-transport-https
-    apt-get install -y dotnet-sdk-6.0
+    apt install -y apt-transport-https
+    apt install -y dotnet-sdk-6.0
 
     echo "installing nuget"
     sh -c "$(wget https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh -O -)"
@@ -184,22 +186,22 @@ else
 fi
 
 echo "installing terminator"
-apt-get update
-apt-get install terminator -y
+apt update
+apt install terminator -y
 
 echo "installing postman"
 snap install postman
 
 echo "installing docker" 
-apt-get remove docker docker-engine docker.io containerd runc
+apt remove docker docker-engine docker.io containerd runc
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-apt-get update
-apt-get install docker-ce docker-ce-cli containerd.io
+apt update
+apt install docker-ce docker-ce-cli containerd.io
 systemctl enable docker
 
 docker run hello-world
@@ -230,7 +232,7 @@ install minikube /usr/local/bin/
 echo "installing Dbeaver"
 wget -c https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O dbeaver.deb
 dpkg -i dbeaver.deb
-apt-get install -f
+apt install -f
 
 echo "Use Robo3t? (y/n)"
 read developer_robo3t
@@ -247,12 +249,12 @@ else
 fi
 
 echo "installing uuid"
-apt-get install uuid
+apt install uuid
 
 echo "installing terraform"
 curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
 apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-apt-get update && apt-get install terraform
+apt update && apt install terraform
 terraform -help
 
 echo "Use Filezilla? (y/n)"
@@ -260,8 +262,8 @@ read developer_filezilla
 if echo "$developer_filezilla" | grep -iq "^y" ;then
     echo "installing filezilla"
     add-apt-repository ppa:n-muench/programs-ppa
-    apt-get update
-    apt-get install filezilla
+    apt update
+    apt install filezilla
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -278,7 +280,7 @@ if echo "$developer_aws" | grep -iq "^y" ;then
     aws --version
 
     echo "installing AWS SAM (Serverless Application Model)"
-    apt-get install python3-pip
+    apt install python3-pip
     pip3 install --user aws-sam-cli
     sam --version
 else
@@ -298,7 +300,7 @@ if echo "$developer_azure" | grep -iq "^y" ;then
     
     sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list'
     
-    apt-get install azure-functions-core-tools-3
+    apt install azure-functions-core-tools-3
 
     echo "installing storage explorer"
     snap install storage-explorer
@@ -312,9 +314,9 @@ read developer_gcp
 if echo "$developer_gcp" | grep -iq "^y" ;then
     echo "installing gcp-cli"
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-    apt-get install apt-transport-https ca-certificates gnupg
+    apt install apt-transport-https ca-certificates gnupg
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-    apt-get update && apt-get install google-cloud-sdk
+    apt update && apt install google-cloud-sdk
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -334,7 +336,7 @@ echo "Use oh-my-zsh? (y/n)"
 read zsh_developer
 if echo "$zsh_developer" | grep -iq "^y" ;then
     echo "installing zsh"
-    apt-get install zsh -y
+    apt install zsh -y
     sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
     chsh -s /bin/zsh
 
