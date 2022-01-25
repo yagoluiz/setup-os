@@ -2,6 +2,8 @@
 
 echo "init"
 
+mkdir ~/setup-temp
+
 sudo apt update && sudo apt upgrade
 
 echo "installing curl" 
@@ -367,3 +369,5 @@ else
 fi
 
 echo "Setup finished :)"
+
+rm -rf ~/setup-temp
