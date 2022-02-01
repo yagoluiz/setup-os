@@ -23,7 +23,7 @@ echo "comunication"
 echo "Use Slack for comunication? (y/n)"
 read comunication_slack
 if echo "$comunication_slack" | grep -iq "^y" ;then
-	wget https://downloads.slack-edge.com/releases/linux/4.19.2/prod/x64/slack-desktop-4.19.2-amd64.deb
+	wget https://downloads.slack-edge.com/releases/linux/4.23.0/prod/x64/slack-desktop-4.23.0-amd64.deb
     apt install ./slack-desktop-*.deb -y
 else
 	echo "Okay, no problem. :) Let's move on!"
@@ -76,7 +76,7 @@ apt install vim -y
 clear
 
 echo "installing VS Code"
-wget https://az764295.vo.msecnd.net/stable/7f6ab5485bbc008386c4386d08766667e155244e/code_1.60.2-1632313585_amd64.deb -O vscode.deb
+wget https://az764295.vo.msecnd.net/stable/899d46d82c4c95423fb7e10e68eba52050e30ba3/code_1.63.2-1639562499_amd64.deb -O vscode.deb
 dpkg -i vscode.deb
 
 echo "NodeJS developer? (y/n)"
@@ -145,7 +145,7 @@ echo "Go developer? (y/n)"
 read developer_go
 if echo "$developer_go" | grep -iq "^y" ;then
     echo "installing go"
-    wget -c https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz -O go.tar.gz
+    wget -c https://dl.google.com/go/go1.17.6.linux-amd64.tar.gz -O go.tar.gz
     rm -rf /usr/local/go
     tar -C /usr/local -xzf go.tar.gz
     export PATH=$PATH:/usr/local/go/bin
