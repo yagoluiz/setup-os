@@ -18,6 +18,12 @@ echo "installing chrome"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 dpkg -i google-chrome-stable_current_amd64.deb
 
+echo "spotify"
+curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+
+apt get update && apt install spotify-client
+
 echo "comunication"
 
 echo "Use Slack for comunication? (y/n)"
