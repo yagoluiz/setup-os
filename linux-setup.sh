@@ -219,6 +219,11 @@ echo "What is your root user for remove "sudo" docker?"
 read docker_user
 usermod -aG docker $docker_user
 
+echo "installing docker-slim"
+wget -c https://downloads.dockerslim.com/releases/1.37.3/dist_linux.tar.gz
+mv dist_linux/docker-slim /usr/local/bin/
+mv dist_linux/docker-slim-sensor /usr/local/bin/
+
 echo "installing kubernetes"
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
