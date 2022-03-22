@@ -24,6 +24,9 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 
 sudo apt update && sudo apt install spotify-client
 
+echo "vlc"
+sudo apt install vlc -y
+
 echo "comunication"
 
 echo "Use Slack for comunication? (y/n)"
