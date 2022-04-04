@@ -260,6 +260,16 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
+echo "FortiClient VPN? (y/n)"
+read forticlient_vpn
+if echo "$forticlient_vpn" | grep -iq "^y" ;then
+    echo "installing FortiClient VPN"
+    wget https://links.fortinet.com/forticlient/deb/vpnagent -O fortinet.deb
+    sudo dpkg -i fortinet.deb
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
+
 echo "installing uuid"
 sudo apt install uuid
 
