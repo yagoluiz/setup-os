@@ -358,28 +358,6 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
-echo "bash"
-
-echo "Use oh-my-bash? (y/n)"
-read bash_developer
-if echo "$bash_developer" | grep -iq "^y" ;then
-    echo "installing bash"
-    sudo sh -c "$(curl -fsSL https://raw.github.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-
-    #themes: https://github.com/ohmybash/oh-my-bash/tree/master/themes
-  
-    if echo "$developer_node" | grep -iq "^y" ;then
-        echo "node version install"
-        source ~/.bashrc
-        nvm --version
-        nvm install 14
-        nvm alias default 14
-        node --version
-        npm --version
-else
-	echo "Okay, no problem. :) Let's move on!"
-fi
-
 echo "Setup finished :)"
 
 rm -rf ~/setup-temp
