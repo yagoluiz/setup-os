@@ -338,23 +338,13 @@ read zsh_developer
 if echo "$zsh_developer" | grep -iq "^y" ;then
     echo "installing zsh"
     sudo apt install zsh -y
-    sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-    chsh -s /bin/zsh
-
-    export alias pbcopy="xclip -selection clipboard"
-    export alias pbpaste="xclip -selection clipboard -o"
-    source ~/.zshrc
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    chsh -s /usr/bin/zsh
 
     echo "installing autosuggestions" 
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
     echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
     source ~/.zshrc
-
-    # themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#theme-description-format
-    echo "installing theme (wezm)"
-    sudo apt install fonts-firacode -y
-    wget -O ~/.oh-my-zsh/themes/wezm.zsh-theme https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/wezm.zsh-theme 
-    sed -i "s/.*ZSH_THEME=.*/ZSH_THEME="wezm"/g" ~/.zshrc
 
     if echo "$developer_node" | grep -iq "^y" ;then
         echo "node version install"
