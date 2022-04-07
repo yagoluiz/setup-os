@@ -220,6 +220,7 @@ sudo usermod -aG docker $docker_user
 
 echo "installing docker-slim"
 wget -c https://downloads.dockerslim.com/releases/1.37.3/dist_linux.tar.gz
+sudo tar -xvf dist_linux.tar.gz
 sudo mv dist_linux/docker-slim /usr/local/bin/
 sudo mv dist_linux/docker-slim-sensor /usr/local/bin/
 
