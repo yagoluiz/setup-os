@@ -148,7 +148,7 @@ echo "Go developer? (y/n)"
 read developer_go
 if echo "$developer_go" | grep -iq "^y" ;then
     echo "installing go"
-    wget -c https://dl.google.com/go/go1.17.6.linux-amd64.tar.gz -O go.tar.gz
+    wget -c https://go.dev/dl/go1.18.linux-amd64.tar.gz -O go.tar.gz
     sudo rm -rf /usr/local/go
     sudo tar -C /usr/local -xzf go.tar.gz
     export PATH=$PATH:/usr/local/go/bin
