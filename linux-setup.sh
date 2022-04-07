@@ -350,8 +350,8 @@ if echo "$zsh_developer" | grep -iq "^y" ;then
         echo "node version install"
         source ~/.zshrc
         nvm --version
-        nvm install 14
-        nvm alias default 14
+        nvm install 16
+        nvm alias default 16
         node --version
         npm --version
 else
