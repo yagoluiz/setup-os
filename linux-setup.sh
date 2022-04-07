@@ -47,13 +47,11 @@ echo "What name do you want to use in GIT user.name?"
 echo "For example, mine will be \"Yago Luiz\""
 read git_config_user_name
 git config --global user.name "$git_config_user_name"
-clear 
 
 echo "What email do you want to use in GIT user.email?"
 echo "For example, mine will be \"yago.luiz@hotmail.com\""
 read git_config_user_email
 git config --global user.email $git_config_user_email
-clear
 
 echo "Can I set VIM as your default GIT editor for you? (y/n)"
 read git_core_editor_to_vim
@@ -82,7 +80,6 @@ sudo chmod +x /usr/local/bin/clustergit
 
 echo "installing vim"
 sudo apt install vim -y
-clear
 
 echo "installing VS Code"
 wget https://az764295.vo.msecnd.net/stable/899d46d82c4c95423fb7e10e68eba52050e30ba3/code_1.63.2-1639562499_amd64.deb -O vscode.deb
