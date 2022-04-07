@@ -78,9 +78,6 @@ echo "installing clustergit"
 sudo curl -SsLo /usr/local/bin/clustergit https://raw.githubusercontent.com/mnagel/clustergit/master/clustergit
 sudo chmod +x /usr/local/bin/clustergit
 
-echo "installing vim"
-sudo apt install vim -y
-
 echo "installing VS Code"
 wget https://az764295.vo.msecnd.net/stable/899d46d82c4c95423fb7e10e68eba52050e30ba3/code_1.63.2-1639562499_amd64.deb -O vscode.deb
 sudo dpkg -i vscode.deb
@@ -355,6 +352,11 @@ if echo "$zsh_developer" | grep -iq "^y" ;then
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
+
+echo "text editor"
+
+echo "installing vim"
+sudo apt install vim -y
 
 echo "Setup finished :)"
 
