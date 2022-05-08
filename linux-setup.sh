@@ -2,7 +2,7 @@
 
 echo "init"
 
-mkdir ~/setup-temp
+mkdir setup-temp && cd setup-temp
 
 sudo apt update && sudo apt upgrade
 
@@ -342,7 +342,7 @@ if echo "$zsh_developer" | grep -iq "^y" ;then
     echo "installing autosuggestions" 
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
     echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrcsource ~/.zshrc
-    
+
     if echo "$developer_node" | grep -iq "^y" ;then
         echo "node version install"
         source ~/.zshrc
@@ -363,4 +363,4 @@ sudo apt install vim -y
 
 echo "Setup finished :)"
 
-rm -rf ~/setup-temp
+cd ~/ && sudo rm -rf setup-temp
