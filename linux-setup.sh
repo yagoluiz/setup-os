@@ -337,12 +337,12 @@ if echo "$zsh_developer" | grep -iq "^y" ;then
     sudo apt install zsh -y
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     chsh -s /usr/bin/zsh
+    source ~/.zshrc
 
     echo "installing autosuggestions" 
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-    echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-    source ~/.zshrc
-
+    echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrcsource ~/.zshrc
+    
     if echo "$developer_node" | grep -iq "^y" ;then
         echo "node version install"
         source ~/.zshrc
@@ -351,8 +351,9 @@ if echo "$zsh_developer" | grep -iq "^y" ;then
         nvm alias default 16
         node --version
         npm --version
-else
-	echo "Okay, no problem. :) Let's move on!"
+    else
+	    echo "Okay, no problem. :) Let's move on!"
+    fi
 fi
 
 echo "text editor"
