@@ -230,6 +230,9 @@ sudo mkdir -p ~/.local/bin/kubectl
 sudo mv ./kubectl ~/.local/bin/kubectl
 kubectl version --client
 
+echo "installing helm"
+sudo curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
+
 echo "installing minikube"
 sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo chmod +x minikube
