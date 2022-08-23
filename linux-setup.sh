@@ -109,21 +109,8 @@ fi
 echo "Dotnet developer? (y/n)"
 read developer_dotnet
 if echo "$developer_dotnet" | grep -iq "^y" ;then
-    wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    sudo dpkg -i packages-microsoft-prod.deb
-
     echo "installing sdk"
-    sudo apt update; \
-    sudo apt install -y apt-transport-https && \
-    sudo apt update && \
-    sudo apt install -y dotnet-sdk-6.0
-
-    echo "installing nuget"
-    sh -c "$(wget https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh -O -)"
-
-    # error: https://github.com/dotnet/aspnetcore/issues/8449
-    echo "installing resolve System.IO.IOException"
-    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+    sudo apt update && sudo apt install -y dotnet6
 
     echo "installing global packages"
     dotnet tool install --global dotnet-ef
