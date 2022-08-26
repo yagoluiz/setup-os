@@ -136,6 +136,7 @@ fi
 echo "Go developer? (y/n)"
 read developer_go
 if echo "$developer_go" | grep -iq "^y" ;then
+    sudo apt install libfuse2 #fix Ubuntu (22.04)
     echo "installing go"
     wget -c https://go.dev/dl/go1.19.linux-amd64.tar.gz -O go.tar.gz
     sudo rm -rf /usr/local/go
