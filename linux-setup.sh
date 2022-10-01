@@ -142,6 +142,9 @@ if echo "$developer_go" | grep -iq "^y" ;then
     sudo tar -C /usr/local -xzf go.tar.gz
     export PATH=$PATH:/usr/local/go/bin
     go version
+    echo "install gcc"
+    # debug race flag, etc
+    sudo apt install gcc
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
