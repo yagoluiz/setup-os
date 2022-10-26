@@ -145,6 +145,8 @@ if echo "$developer_go" | grep -iq "^y" ;then
     echo "install gcc"
     # debug race flag, etc
     sudo apt install gcc
+    echo "install make"
+    sudo apt install make
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
