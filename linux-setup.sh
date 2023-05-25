@@ -110,7 +110,7 @@ echo "Dotnet developer? (y/n)"
 read developer_dotnet
 if echo "$developer_dotnet" | grep -iq "^y" ;then
     echo "installing sdk"
-    sudo apt update && sudo apt install -y dotnet6
+    sudo apt update && sudo apt install -y dotnet-sdk-7.0
 
     echo "installing global packages"
     dotnet tool install --global dotnet-ef
