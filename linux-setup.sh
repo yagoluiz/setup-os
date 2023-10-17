@@ -151,6 +151,26 @@ else
 	echo "Okay, no problem. :) Let's move on!"
 fi
 
+echo "Clojure developer? (y/n)"
+read developer_clojure
+if echo "$developer_clojure" | grep -iq "^y" ;then
+    echo "installing java (temurin SDK)"
+    sudo apt install -y wget apt-transport-https
+    sudo mkdir -p /etc/apt/keyrings
+    wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo tee /etc/apt/keyrings/adoptium.asc
+    echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
+    sudo apt update
+    sudo apt install temurin-17-jdk
+
+    echo "installing clojure"
+    sudo apt install rlwrap
+    curl -L -O https://github.com/clojure/brew-install/releases/latest/download/linux-install.sh
+    chmod +x linux-install.sh
+    sudo ./linux-install.sh
+else
+	echo "Okay, no problem. :) Let's move on!"
+fi
+
 echo "JetBrains developer? (y/n)"
 read developer_jetbrains
 if echo "$developer_jetbrains" | grep -iq "^y" ;then
