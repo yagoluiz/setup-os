@@ -145,8 +145,6 @@ if echo "$developer_go" | grep -iq "^y" ;then
     echo "install gcc"
     # debug race flag, etc
     sudo apt install gcc
-    echo "install make"
-    sudo apt install make
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -167,6 +165,11 @@ if echo "$developer_clojure" | grep -iq "^y" ;then
     curl -L -O https://github.com/clojure/brew-install/releases/latest/download/linux-install.sh
     chmod +x linux-install.sh
     sudo ./linux-install.sh
+
+    echo "installing leiningen"
+    sudo wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein -P /usr/local/bin
+    sudo chmod a+x /usr/local/bin/lein
+    lein -v
 else
 	echo "Okay, no problem. :) Let's move on!"
 fi
@@ -285,6 +288,9 @@ fi
 
 echo "installing uuid"
 sudo apt install uuid
+
+echo "install make"
+sudo apt install make
 
 echo "cloud"
 
